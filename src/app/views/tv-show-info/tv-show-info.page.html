@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Back</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{showInfo?.name}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card (click)="playTvShow()">
+    <img [alt]="showInfo?.name" [src]="showInfo?.image.original || ''" />
+    <div class="info-container">
+      <div>
+        <ion-card-header>
+          <a [href]="showInfo?.officialSite" target="_blank">
+            <ion-card-title>{{showInfo?.name}}</ion-card-title>
+          </a>
+          <ion-card-subtitle
+            >{{ showInfo?.premiered | date }}</ion-card-subtitle
+          >
+          <ion-card-subtitle
+            ><b>Rating:</b> {{ showInfo?.rating.average }} /
+            10</ion-card-subtitle
+          >
+          <ion-card-subtitle
+            ><b>Language:</b> {{ showInfo?.language }}</ion-card-subtitle
+          >
+          <ion-card-subtitle
+            ><b>Genres:</b> {{ showInfo?.genres | genreList
+            }}</ion-card-subtitle
+          >
+        </ion-card-header>
+        <ion-card-content>
+          <div [innerHTML]="showInfo?.summary | safeHtml"></div
+        ></ion-card-content>
+      </div>
+      <ion-button
+        class="play-button"
+        shape="round"
+        [href]="showInfo?.url"
+        target="_blank"
+        ><ion-icon slot="icon-only" name="play"></ion-icon
+      ></ion-button>
+    </div>
+  </ion-card>
+</ion-content>

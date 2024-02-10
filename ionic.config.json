@@ -1,0 +1,7 @@
+{
+  "name": "tv-shows",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ genre.toUpperCase() }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ genre }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-card
+      *ngFor="let show of showsList"
+      (click)="navigateToTvShowInfo(show.id)"
+    >
+      <img [alt]="show.name" [src]="show.image.original || ''" />
+      <ion-card-header>
+        <ion-card-title>{{show.name}}</ion-card-title>
+        <ion-card-subtitle
+          >Rating: {{ show.rating.average }} / 10</ion-card-subtitle
+        >
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>
