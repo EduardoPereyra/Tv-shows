@@ -26,19 +26,24 @@ export class GenreTvShowsPage implements OnInit {
 
   ngOnInit() {
     this.genre = this.activatedRoute.snapshot.paramMap.get('genre') as string;
-    this.getTvShowData();
+    this.cleanSearch();
   }
 
   getTvShowData() {
+    // gets all the tv shows
     this.tvShowRestService.getShowData().subscribe((data: any) => {
       this.showsList = data
-        .filter((obj: any) =>
-          obj.genres.some(
-            (g: string) => g.toLowerCase() === this.genre.toLocaleLowerCase()
-          )
+        .filter(
+          (
+            obj: any // filter by genre
+          ) =>
+            obj.genres.some(
+              (g: string) => g.toLowerCase() === this.genre.toLocaleLowerCase()
+            )
         )
         .slice()
         .sort((a: any, b: any) => {
+          // sorts by rating
           return b.rating.average - a.rating.average;
         });
     });
@@ -51,6 +56,7 @@ export class GenreTvShowsPage implements OnInit {
   }
 
   getTvShowDataSearch() {
+    // gets the tv shows matching the search text
     this.showsList = [];
     this.tvShowRestService
       .getShowDataSearch(this.searchText)

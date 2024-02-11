@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'genreList',
 })
 export class GenreListPipe implements PipeTransform {
+  // makes a list of elements separated by ","
   transform(genres: string[]): string {
     if (genres) {
       return genres.join(', ');

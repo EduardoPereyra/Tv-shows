@@ -20,6 +20,7 @@ export class TvShowInfoPage implements OnInit {
   }
 
   getTvShowData() {
+    // get tv show data by id
     this.tvShowRestService
       .getShowDetails(this.showId)
       .subscribe((data: any) => {

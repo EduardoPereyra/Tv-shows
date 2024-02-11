@@ -11,14 +11,17 @@ export class TvShowRestService {
   constructor(private httpClient: HttpClient) {}
 
   getShowData(): Observable<any> {
+    // gets all the tv shows
     return this.httpClient.get(`${this.apiUrl}/shows`);
   }
 
   getShowDataSearch(title: string): Observable<any> {
+    // gets all the tv shows matching the title
     return this.httpClient.get(`${this.apiUrl}/search/shows?q=${title}`);
   }
 
   getShowDetails(showId: string): Observable<any> {
+    // gets the tv show matching the id
     return this.httpClient.get(`${this.apiUrl}/shows/${showId}`);
   }
 }

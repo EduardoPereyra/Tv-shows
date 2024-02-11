@@ -24,3 +24,9 @@ Design the application with a focus on clean code, reusability, and frontend bes
 - Verify that the application runs without console errors before submission.
 - Keep the UI simple yet eye-catching.
 - Feel free to incorporate additional features beyond those specified in the assignment.
+
+## Running project
+
+- npm i -g @ionic/cli
+- npm i
+- ng serve

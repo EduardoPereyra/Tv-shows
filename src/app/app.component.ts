@@ -8,7 +8,7 @@ import { TvShowRestService } from './services/tv-show.service';
 export class AppComponent implements OnInit {
   public appPages = Array<any>();
 
-  constructor(private tvShowRestService: TvShowRestService) {}
+  constructor() {}
   genres = [
     'Action',
     'Adventure',
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
     'War',
     'Western',
   ];
-  public allGenres = Array<string>();
 
   ngOnInit(): void {
     this.getTvShowGenres();
