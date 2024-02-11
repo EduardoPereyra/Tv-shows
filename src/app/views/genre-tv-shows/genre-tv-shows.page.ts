@@ -40,7 +40,7 @@ export class GenreTvShowsPage implements OnInit {
             (
               obj: TVShowData // filter by genre
             ) =>
-              obj.genres.some(
+              obj.genres?.some(
                 (g: string) =>
                   g.toLowerCase() === this.genre.toLocaleLowerCase()
               )
@@ -48,7 +48,7 @@ export class GenreTvShowsPage implements OnInit {
           .slice()
           .sort((a: TVShowData, b: TVShowData) => {
             // sorts by rating
-            return b.rating.average - a.rating.average;
+            return b.rating?.average - a.rating?.average;
           });
       });
   }
@@ -72,7 +72,7 @@ export class GenreTvShowsPage implements OnInit {
       });
   }
 
-  navigateToTvShowInfo(id: string) {
+  navigateToTvShowInfo(id: number) {
     this.router.navigate(['tv-show-info', id]);
   }
 

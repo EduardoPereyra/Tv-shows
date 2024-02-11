@@ -33,52 +33,52 @@ interface Image {
 
 export interface TVShowData {
   id: number;
-  url: string;
+  url?: string;
   name: string;
-  type: string;
-  language: string;
+  type?: string;
+  language?: string;
   genres: string[];
-  status: string;
-  runtime: number;
-  averageRuntime: number;
-  premiered: string;
-  ended: string;
-  officialSite: string;
-  schedule: Schedule;
+  status?: string;
+  runtime?: number;
+  averageRuntime?: number;
+  premiered?: string;
+  ended?: string;
+  officialSite?: string;
+  schedule?: Schedule;
   rating: Rating;
-  weight: number;
-  network: Network;
-  webChannel: null | string;
-  dvdCountry: null | string;
-  externals: External;
-  image: Image;
+  weight?: number;
+  network?: Network;
+  webChannel?: null | string;
+  dvdCountry?: null | string;
+  externals?: External;
+  image?: Image;
   summary: string;
-  updated: number;
+  updated?: number;
 }
 
 export class TVShow {
   id: number;
-  url: string;
+  url?: string;
   name: string;
-  type: string;
-  language: string;
+  type?: string;
+  language?: string;
   genres: string[];
-  status: string;
-  runtime: number;
-  averageRuntime: number;
-  premiered: string;
-  ended: string;
-  officialSite: string;
-  schedule: Schedule;
-  rating: Rating;
-  weight: number;
-  network: Network;
-  webChannel: null | string;
-  dvdCountry: null | string;
-  externals: External;
-  image: Image;
+  status?: string;
+  runtime?: number;
+  averageRuntime?: number;
+  premiered?: string;
+  ended?: string;
+  officialSite?: string;
+  schedule?: Schedule;
+  rating?: Rating;
+  weight?: number;
+  network?: Network;
+  webChannel?: null | string;
+  dvdCountry?: null | string;
+  externals?: External;
+  image?: Image;
   summary: string;
-  updated: number;
+  updated?: number;
 
   constructor(jsonData: TVShowData) {
     this.id = jsonData.id;
