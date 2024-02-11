@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonModal, ModalController } from '@ionic/angular';
 import { SearchModalComponent } from 'src/app/components/search-modal/search-modal.component';
 import { TvShowRestService } from 'src/app/services/tv-show.service';
+import { TVShowData } from 'src/app/types/show';
 
 @Component({
   selector: 'app-genre-tv-shows',
@@ -14,7 +15,7 @@ export class GenreTvShowsPage implements OnInit {
   modal!: IonModal;
   public genre!: string;
   private activatedRoute = inject(ActivatedRoute);
-  public showsList = Array<any>();
+  public showsList = Array<TVShowData>();
   searchText: string = '';
   searched: boolean = false;
 
@@ -31,22 +32,25 @@ export class GenreTvShowsPage implements OnInit {
 
   getTvShowData() {
     // gets all the tv shows
-    this.tvShowRestService.getShowData().subscribe((data: any) => {
-      this.showsList = data
-        .filter(
-          (
-            obj: any // filter by genre
-          ) =>
-            obj.genres.some(
-              (g: string) => g.toLowerCase() === this.genre.toLocaleLowerCase()
-            )
-        )
-        .slice()
-        .sort((a: any, b: any) => {
-          // sorts by rating
-          return b.rating.average - a.rating.average;
-        });
-    });
+    this.tvShowRestService
+      .getShowData()
+      .subscribe((data: Array<TVShowData>) => {
+        this.showsList = data
+          .filter(
+            (
+              obj: TVShowData // filter by genre
+            ) =>
+              obj.genres.some(
+                (g: string) =>
+                  g.toLowerCase() === this.genre.toLocaleLowerCase()
+              )
+          )
+          .slice()
+          .sort((a: TVShowData, b: TVShowData) => {
+            // sorts by rating
+            return b.rating.average - a.rating.average;
+          });
+      });
   }
 
   cleanSearch() {
@@ -60,7 +64,7 @@ export class GenreTvShowsPage implements OnInit {
     this.showsList = [];
     this.tvShowRestService
       .getShowDataSearch(this.searchText)
-      .subscribe((data: any) => {
+      .subscribe((data: Array<TVShowData>) => {
         data.forEach((obj: any) => {
           this.showsList.push(obj.show);
         });

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TvShowRestService } from 'src/app/services/tv-show.service';
+import { TVShow, TVShowData } from 'src/app/types/show';
 
 @Component({
   selector: 'app-tv-show-info',
@@ -10,7 +11,7 @@ import { TvShowRestService } from 'src/app/services/tv-show.service';
 export class TvShowInfoPage implements OnInit {
   public showId!: string;
   private activatedRoute = inject(ActivatedRoute);
-  public showInfo: any;
+  public showInfo: TVShowData | undefined;
 
   constructor(private tvShowRestService: TvShowRestService) {}
 
@@ -23,7 +24,7 @@ export class TvShowInfoPage implements OnInit {
     // get tv show data by id
     this.tvShowRestService
       .getShowDetails(this.showId)
-      .subscribe((data: any) => {
+      .subscribe((data: TVShowData) => {
         this.showInfo = data;
       });
   }
