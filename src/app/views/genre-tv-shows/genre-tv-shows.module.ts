@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GenreTvShowsPageRoutingModule } from './genre-tv-shows-routing.module';
 
 import { GenreTvShowsPage } from './genre-tv-shows.page';
+import { SearchModalComponent } from 'src/app/components/search-modal/search-modal.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GenreTvShowsPageRoutingModule
+    GenreTvShowsPageRoutingModule,
   ],
-  declarations: [GenreTvShowsPage]
+  declarations: [GenreTvShowsPage, SearchModalComponent],
 })
 export class GenreTvShowsPageModule {}

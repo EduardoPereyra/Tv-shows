@@ -3,9 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ genre.toUpperCase() }}</ion-title>
+    <ion-title *ngIf="!searched; else searchTitle"
+      >{{ genre.toUpperCase() }}</ion-title
+    >
+    <ng-template #searchTitle>
+      <ion-title #searchTitle>Search results</ion-title>
+    </ng-template>
     <div [hidden]="searched" slot="end" class="search-button">
-      <ion-button id="open-modal" shape="round" target="_blank"
+      <ion-button (click)="openModal()" shape="round" target="_blank"
         ><ion-icon slot="icon-only" name="search"></ion-icon
       ></ion-button>
     </div>
@@ -41,29 +46,4 @@
       </ion-card-header>
     </ion-card>
   </div>
-  <ion-modal trigger="open-modal">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-buttons slot="end">
-            <ion-button (click)="search()" [strong]="true">Search</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-input
-            label="Enter tv show"
-            labelPlacement="stacked"
-            type="text"
-            placeholder="TV show"
-            [(ngModel)]="searchText"
-          ></ion-input>
-        </ion-item>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content>

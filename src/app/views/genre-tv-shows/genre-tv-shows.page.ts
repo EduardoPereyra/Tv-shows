@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
+import { IonModal, ModalController } from '@ionic/angular';
+import { SearchModalComponent } from 'src/app/components/search-modal/search-modal.component';
 import { TvShowRestService } from 'src/app/services/tv-show.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class GenreTvShowsPage implements OnInit {
 
   constructor(
     private tvShowRestService: TvShowRestService,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -64,12 +66,17 @@ export class GenreTvShowsPage implements OnInit {
     this.router.navigate(['tv-show-info', id]);
   }
 
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: SearchModalComponent,
+    });
+    modal.present();
 
-  search() {
-    this.modal.dismiss(this.searchText, 'confirm');
-    this.getTvShowDataSearch();
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'search') {
+      this.searchText = data;
+      this.getTvShowDataSearch();
+    }
   }
 }
