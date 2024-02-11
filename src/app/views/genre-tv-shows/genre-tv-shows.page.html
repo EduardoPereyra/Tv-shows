@@ -4,6 +4,16 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ genre.toUpperCase() }}</ion-title>
+    <div [hidden]="searched" slot="end" class="search-button">
+      <ion-button id="open-modal" shape="round" target="_blank"
+        ><ion-icon slot="icon-only" name="search"></ion-icon
+      ></ion-button>
+    </div>
+    <div *ngIf="searched" slot="end" class="search-button">
+      <ion-button (click)="cleanSearch()" shape="round" target="_blank"
+        ><ion-icon slot="icon-only" name="trash-bin"></ion-icon
+      ></ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -19,13 +29,41 @@
       *ngFor="let show of showsList"
       (click)="navigateToTvShowInfo(show.id)"
     >
-      <img [alt]="show.name" [src]="show.image.original || ''" />
+      <img
+        [alt]="show?.name"
+        [src]="show?.image?.original || '../assets/images/icon.png'"
+      />
       <ion-card-header>
-        <ion-card-title>{{show.name}}</ion-card-title>
+        <ion-card-title>{{show?.name}}</ion-card-title>
         <ion-card-subtitle
-          >Rating: {{ show.rating.average }} / 10</ion-card-subtitle
+          >Rating: {{ show?.rating?.average }} / 10</ion-card-subtitle
         >
       </ion-card-header>
     </ion-card>
   </div>
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="search()" [strong]="true">Search</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Enter tv show"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="TV show"
+            [(ngModel)]="searchText"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -1,5 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 import { TvShowRestService } from 'src/app/services/tv-show.service';
 
 @Component({
@@ -8,9 +9,13 @@ import { TvShowRestService } from 'src/app/services/tv-show.service';
   styleUrls: ['./genre-tv-shows.page.scss'],
 })
 export class GenreTvShowsPage implements OnInit {
+  @ViewChild(IonModal)
+  modal!: IonModal;
   public genre!: string;
   private activatedRoute = inject(ActivatedRoute);
   public showsList = Array<any>();
+  searchText: string = '';
+  searched: boolean = false;
 
   constructor(
     private tvShowRestService: TvShowRestService,
@@ -34,11 +39,37 @@ export class GenreTvShowsPage implements OnInit {
         .sort((a: any, b: any) => {
           return b.rating.average - a.rating.average;
         });
-      console.log(this.showsList);
     });
+  }
+
+  cleanSearch() {
+    this.searchText = '';
+    this.searched = false;
+    this.getTvShowData();
+  }
+
+  getTvShowDataSearch() {
+    this.showsList = [];
+    this.tvShowRestService
+      .getShowDataSearch(this.searchText)
+      .subscribe((data: any) => {
+        data.forEach((obj: any) => {
+          this.showsList.push(obj.show);
+        });
+        this.searched = true;
+      });
   }
 
   navigateToTvShowInfo(id: string) {
     this.router.navigate(['tv-show-info', id]);
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  search() {
+    this.modal.dismiss(this.searchText, 'confirm');
+    this.getTvShowDataSearch();
   }
 }

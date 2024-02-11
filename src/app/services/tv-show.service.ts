@@ -14,6 +14,10 @@ export class TvShowRestService {
     return this.httpClient.get(`${this.apiUrl}/shows`);
   }
 
+  getShowDataSearch(title: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/search/shows?q=${title}`);
+  }
+
   getShowDetails(showId: string): Observable<any> {
     return this.httpClient.get(`${this.apiUrl}/shows/${showId}`);
   }

@@ -23,7 +23,6 @@ export class TvShowInfoPage implements OnInit {
     this.tvShowRestService
       .getShowDetails(this.showId)
       .subscribe((data: any) => {
-        console.log(data);
         this.showInfo = data;
       });
   }

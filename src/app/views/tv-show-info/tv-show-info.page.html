@@ -14,7 +14,10 @@
     </ion-toolbar>
   </ion-header>
   <ion-card (click)="playTvShow()">
-    <img [alt]="showInfo?.name" [src]="showInfo?.image.original || ''" />
+    <img
+      [alt]="showInfo?.name"
+      [src]="showInfo?.image?.original || '../assets/images/icon.png'"
+    />
     <div class="info-container">
       <div>
         <ion-card-header>
@@ -25,7 +28,7 @@
             >{{ showInfo?.premiered | date }}</ion-card-subtitle
           >
           <ion-card-subtitle
-            ><b>Rating:</b> {{ showInfo?.rating.average }} /
+            ><b>Rating:</b> {{ showInfo?.rating?.average || 0 }} /
             10</ion-card-subtitle
           >
           <ion-card-subtitle
