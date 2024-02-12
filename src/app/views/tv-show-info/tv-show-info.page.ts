@@ -50,7 +50,6 @@ export class TvShowInfoPage implements OnInit {
                     return acc;
                   }, {})
                 );
-                console.log(this.showEpisodes);
               });
           });
       });
