@@ -24,4 +24,14 @@ export class TvShowRestService {
     // gets the tv show matching the id
     return this.httpClient.get(`${this.apiUrl}/shows/${showId}`);
   }
+
+  getShowMoreInfoCast(showId: string): Observable<any> {
+    // gets the tv show matching the id
+    return this.httpClient.get(`${this.apiUrl}/shows/${showId}/cast`);
+  }
+
+  getShowMoreInfoEpisodes(showId: string): Observable<any> {
+    // gets the tv show matching the id
+    return this.httpClient.get(`${this.apiUrl}/shows/${showId}/episodes`);
+  }
 }

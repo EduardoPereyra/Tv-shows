@@ -38,6 +38,13 @@
             ><b>Genres:</b> {{ showInfo?.genres | genreList
             }}</ion-card-subtitle
           >
+
+          <ion-card-subtitle
+            ><b>Starring:</b>
+            <span *ngFor="let person of showCast?.slice(0,3)">
+              {{person.person.name}} ({{person.character.name}}),
+            </span></ion-card-subtitle
+          >
         </ion-card-header>
         <ion-card-content>
           <div [innerHTML]="showInfo?.summary | safeHtml"></div
@@ -52,4 +59,21 @@
       ></ion-button>
     </div>
   </ion-card>
+  <ion-accordion-group class="seasons-container">
+    <ion-accordion *ngFor="let season of showEpisodes">
+      <ion-item slot="header" color="light">
+        <ion-label>Season {{season.season}}</ion-label>
+      </ion-item>
+      <div
+        class="ion-padding episode-info-container"
+        slot="content"
+        *ngFor="let episode of season.episodes"
+      >
+        <a [href]="episode.url" target="_blank">
+          <p>{{episode.number}}. {{episode.name}}</p>
+          <p><b>Rating:</b> {{ showInfo?.rating?.average || 0 }} / 10</p>
+        </a>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>

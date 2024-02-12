@@ -4,6 +4,7 @@ ion-card {
 }
 ion-card img {
   max-width: 20vw;
+  object-fit: cover;
 }
 
 .info-container {
@@ -14,6 +15,20 @@ ion-card img {
 
 .info-container .play-button {
   margin: 16px;
+}
+
+.seasons-container {
+  margin: 0 30px;
+}
+
+.seasons-container p {
+  margin: 0;
+}
+
+.episode-info-container a {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
 }
 
 @media (max-width: 1024px) {

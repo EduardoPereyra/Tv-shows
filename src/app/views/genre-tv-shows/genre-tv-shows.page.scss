@@ -14,6 +14,10 @@ ion-card {
   flex-direction: column;
 }
 
+ion-card img {
+  object-fit: cover;
+}
+
 .star-rating {
   color: #ffd700;
 }
