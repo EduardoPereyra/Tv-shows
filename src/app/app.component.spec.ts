@@ -1,46 +1,69 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-
-import { RouterTestingModule } from '@angular/router/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { TvShowRestService } from './services/tv-show.service';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let genres: Array<string>;
 
-
-  beforeEach(async () => {
-
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [AppComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [RouterTestingModule.withRoutes([])],
+      providers: [TvShowRestService], // Add your service or mock here if needed
     }).compileComponents();
+    genres = [
+      'Action',
+      'Adventure',
+      'Anime',
+      'Comedy',
+      'Crime',
+      'Drama',
+      'Espionage',
+      'Family',
+      'Fantasy',
+      'History',
+      'Horror',
+      'Legal',
+      'Medical',
+      'Music',
+      'Mystery',
+      'Romance',
+      'Science-Fiction',
+      'Sports',
+      'Supernatural',
+      'Thriller',
+      'War',
+      'Western',
+    ];
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it('should have menu labels', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const app = fixture.nativeElement;
-    const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(12);
-    expect(menuItems[0].textContent).toContain('Inbox');
-    expect(menuItems[1].textContent).toContain('Outbox');
+  it('should call getTvShowGenres on ngOnInit', () => {
+    spyOn(component, 'getTvShowGenres');
+    component.ngOnInit();
+    expect(component.getTvShowGenres).toHaveBeenCalled();
   });
 
-  it('should have urls', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const app = fixture.nativeElement;
-    const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(12);
-    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/folder/inbox');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/folder/outbox');
-  });
+  // it('should populate appPages with genres on getTvShowGenres', () => {
+  //   component.getTvShowGenres();
+  //   expect(component.appPages.length).toBe(genres.length);
 
+  //   genres.forEach((genre, index) => {
+  //     expect(component.appPages[index].title).toBe(genre);
+  //     expect(component.appPages[index].url).toBe(
+  //       `/genre/${genre.toLowerCase()}`
+  //     );
+  //     expect(component.appPages[index].icon).toBe('film');
+  //   });
+  // });
 });

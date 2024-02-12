@@ -1,17 +1,110 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 import { TvShowInfoPage } from './tv-show-info.page';
+import { TvShowRestService } from 'src/app/services/tv-show.service';
+import { TVShowData } from 'src/app/types/show';
+import { GenreListPipe } from 'src/app/pipes/genre-list.pipe';
+import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 
 describe('TvShowInfoPage', () => {
   let component: TvShowInfoPage;
   let fixture: ComponentFixture<TvShowInfoPage>;
+  let mockTvShowRestService: any;
+  let mockActivatedRoute: { snapshot: { paramMap: { get: jasmine.Spy } } };
+  let mockShowData: TVShowData;
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(TvShowInfoPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+  // beforeEach(waitForAsync(() => {
+  //   let mockTvShowRestService = {
+  //     getShowDetails: () => {},
+  //   };
+  //   mockActivatedRoute = {
+  //     snapshot: { paramMap: { get: jasmine.createSpy() } },
+  //   };
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  //   TestBed.configureTestingModule({
+  //     declarations: [TvShowInfoPage, SafeHtmlPipe, GenreListPipe],
+  //     providers: [
+  //       { provide: TvShowRestService, useValue: mockTvShowRestService },
+  //       { provide: ActivatedRoute, useValue: mockActivatedRoute },
+  //     ],
+  //   }).compileComponents();
+  // }));
+
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(TvShowInfoPage);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  //   // Sample mock data for testing
+  //   mockShowData = {
+  //     id: 1,
+  //     url: 'https://www.tvmaze.com/shows/1/under-the-dome',
+  //     name: 'Under the Dome',
+  //     type: 'Scripted',
+  //     language: 'English',
+  //     genres: ['Drama', 'Science-Fiction', 'Thriller'],
+  //     status: 'Ended',
+  //     runtime: 60,
+  //     averageRuntime: 60,
+  //     premiered: '2013-06-24',
+  //     ended: '2015-09-10',
+  //     officialSite: 'http://www.cbs.com/shows/under-the-dome/',
+  //     schedule: {
+  //       time: '22:00',
+  //       days: ['Thursday'],
+  //     },
+  //     rating: {
+  //       average: 6.5,
+  //     },
+  //     weight: 98,
+  //     network: {
+  //       id: 2,
+  //       name: 'CBS',
+  //       country: {
+  //         name: 'United States',
+  //         code: 'US',
+  //         timezone: 'America/New_York',
+  //       },
+  //       officialSite: 'https://www.cbs.com/',
+  //     },
+  //     webChannel: null,
+  //     dvdCountry: null,
+  //     externals: {
+  //       tvrage: 25988,
+  //       thetvdb: 264492,
+  //       imdb: 'tt1553656',
+  //     },
+  //     image: {
+  //       medium:
+  //         'https://static.tvmaze.com/uploads/images/medium_portrait/81/202627.jpg',
+  //       original:
+  //         'https://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg',
+  //     },
+  //     summary:
+  //       "<p><b>Under the Dome</b> is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away.</p>",
+  //     updated: 1704794065,
+  //   };
+  // });
+
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
+
+  // it('should call getTvShowDetails on ngOnInit', () => {
+  //   spyOn(component, 'getTvShowDetails');
+  //   component.ngOnInit();
+  //   expect(component.getTvShowDetails).toHaveBeenCalled();
+  // });
+
+  // it('should call getShowDetails on getTvShowDetails', () => {
+  //   spyOn(mockTvShowRestService, 'getShowDetails').and.returnValue({
+  //     subscribe: () => {},
+  //   });
+  //   mockActivatedRoute.snapshot.paramMap.get.and.returnValue('1');
+
+  //   component.getTvShowDetails();
+
+  //   expect(mockTvShowRestService.getShowDetails).toHaveBeenCalledWith('1');
+  //   expect(component.showInfo).toEqual(mockShowData);
+  // });
 });

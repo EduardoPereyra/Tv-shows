@@ -17,10 +17,10 @@ export class TvShowInfoPage implements OnInit {
 
   ngOnInit() {
     this.showId = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.getTvShowData();
+    this.getTvShowDetails();
   }
 
-  getTvShowData() {
+  getTvShowDetails() {
     // get tv show data by id
     this.tvShowRestService
       .getShowDetails(this.showId)
@@ -28,6 +28,4 @@ export class TvShowInfoPage implements OnInit {
         this.showInfo = data;
       });
   }
-
-  playTvShow() {}
 }

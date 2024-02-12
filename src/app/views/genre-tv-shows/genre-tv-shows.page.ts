@@ -30,10 +30,10 @@ export class GenreTvShowsPage implements OnInit {
     this.cleanSearch();
   }
 
-  getTvShowData() {
+  getTvShowsData() {
     // gets all the tv shows
     this.tvShowRestService
-      .getShowData()
+      .getTvShowsData()
       .subscribe((data: Array<TVShowData>) => {
         this.showsList = data
           .filter(
@@ -56,14 +56,14 @@ export class GenreTvShowsPage implements OnInit {
   cleanSearch() {
     this.searchText = '';
     this.searched = false;
-    this.getTvShowData();
+    this.getTvShowsData();
   }
 
-  getTvShowDataSearch() {
+  getTvShowsDataSearch() {
     // gets the tv shows matching the search text
     this.showsList = [];
     this.tvShowRestService
-      .getShowDataSearch(this.searchText)
+      .getTvShowsDataSearch(this.searchText)
       .subscribe((data: Array<TVShowData>) => {
         data.forEach((obj: any) => {
           this.showsList.push(obj.show);
@@ -86,7 +86,7 @@ export class GenreTvShowsPage implements OnInit {
 
     if (role === 'search') {
       this.searchText = data;
-      this.getTvShowDataSearch();
+      this.getTvShowsDataSearch();
     }
   }
 }
